@@ -54,9 +54,7 @@ public class SpoonacularIntegration {
 		}
 		System.out.println("Test completed.");
 		
-//		ResponseEntity<DayResponse> response = rt.getForEntity(uri, DayResponse.class);
-//		System.out.println(response);
-													   
+			   
 	}
 	
 }
