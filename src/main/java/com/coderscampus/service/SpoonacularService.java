@@ -11,7 +11,7 @@ import com.coderscampus.Spoonacular.dto.WeekResponse;
 
 @Service
 public class SpoonacularService {
-	private static final String API_KEY = "ccfa8cb49d2f4716aaa657f9feff1713"; // Your API key
+	private static final String API_KEY = "8b295766d3e94fffac8e53d273faa0a3"; 
     private static final String BASE_URL = "https://api.spoonacular.com/mealplanner/generate";
 
     private final RestTemplate restTemplate;
@@ -31,13 +31,23 @@ public class SpoonacularService {
     }
 
     private URI buildUri(String timeFrame, String numCalories, String diet, String exclusions) {
-        return UriComponentsBuilder.fromUriString(BASE_URL)
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL)
                                   .queryParam("timeFrame", timeFrame)
                                   .queryParam("targetCalories", numCalories)
                                   .queryParam("diet", diet)
                                   .queryParam("exclude", exclusions)
-                                  .queryParam("apiKey", API_KEY)
-                                  .build()
-                                  .toUri();
+                                  .queryParam("apiKey", API_KEY);
+        
+                                  if (numCalories != null && !numCalories.isEmpty()) {
+                                      builder.queryParam("targetCalories", numCalories);
+                                  }
+                                  if (diet != null && !diet.isEmpty()) {
+                                      builder.queryParam("diet", diet);
+                                  }
+                                  if (exclusions != null && !exclusions.isEmpty()) {
+                                      builder.queryParam("exclude", exclusions);
+                                  }
+
+                                  return builder.build().toUri();
     }
 }
