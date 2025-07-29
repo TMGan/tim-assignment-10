@@ -1,4 +1,4 @@
-package com.coderscampus.Spoonacular.dto;
+package com.coderscampus.dto;
 
 import java.util.Map;
 

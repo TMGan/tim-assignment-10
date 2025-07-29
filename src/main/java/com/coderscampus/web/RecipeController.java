@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coderscampus.Spoonacular.dto.DayResponse;
-import com.coderscampus.Spoonacular.dto.WeekResponse;
+import com.coderscampus.dto.DayResponse;
+import com.coderscampus.dto.WeekResponse;
 import com.coderscampus.service.SpoonacularService;
 
 @RestController
@@ -20,17 +20,17 @@ public class RecipeController {
     }
 
     @GetMapping("mealplanner/day")
-    public ResponseEntity<DayResponse> getDayMeals(@RequestParam(required=false) String numCalories,
-    											   @RequestParam (required=false)String diet,
-    											   @RequestParam(required=false) String exclusions) {
+    public ResponseEntity<DayResponse> getDayMeals(@RequestParam String numCalories,
+    											   @RequestParam String diet,
+    											   @RequestParam String exclusions) {
         DayResponse dayResponse = spoonacularService.getDailyMealPlan(numCalories, diet, exclusions);
         return ResponseEntity.ok(dayResponse);
     }
 
     @GetMapping("mealplanner/week")
-    public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam (required=false)String numCalories, 
-    												 @RequestParam (required=false)String diet, 
-    												 @RequestParam (required=false)String exclusions) {
+    public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam String numCalories, 
+    												 @RequestParam String diet, 
+    												 @RequestParam String exclusions) {
         WeekResponse weekResponse = spoonacularService.getWeeklyMealPlan(numCalories, diet, exclusions);
         return ResponseEntity.ok(weekResponse);
     }
